@@ -1,2 +1,25 @@
-# one-line-validator
-Validate Any Form in 60 Seconds (1 Line of Code!)
+# One Line Validator
+
+A super simple, 1-line form validation library using jQuery. Designed for beginners and fast prototyping.
+
+## ✅ Features
+
+- Validates form fields with one function call
+- Adds error messages and red borders
+- Returns valid form data as a JSON object
+- Requires only jQuery
+
+## 🚀 Usage
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/codewithmark/one-line-validator@v1.0.0/dist/OneLineValidator.min.js"></script>
+<script>
+  $('#submitBtn').on('click', function (e) {
+    e.preventDefault();
+    const result = OneLineValidator('#commonForm');
+    if (result) {
+      console.log(result);
+      alert('Form is valid!');
+    }
+  });
+</script>
