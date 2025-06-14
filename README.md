@@ -1,6 +1,6 @@
 # One Line Validator
 
-A super simple, 1-line form validation library using jQuery. Designed for beginners and fast prototyping.
+A super simple, 1-line form validation library. Designed for beginners and fast prototyping.
 
 ## ✅ Features
 
