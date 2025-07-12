@@ -53,10 +53,17 @@ class OneLineValidator {
     return fallback;
   }
 
+  hasCustomError(field) {
+    return this.customErrors.some(err =>
+      (err.id && field.id === err.id) || (err.class && field.classList.contains(err.class))
+    );
+  }
+
   validateField(field) {
     const type = field.type;
     const value = field.value;
-    const required = field.required;
+    const originallyRequired = field.required;
+    const required = originallyRequired || this.hasCustomError(field);
     let errorMsg = '';
 
     if (required && !value && type !== 'checkbox') {
@@ -140,14 +147,13 @@ class OneLineValidator {
     return this.isValid ? this.formData : false;
   }
 
-  // ✅ Static method to call like a function
   static validate(formSelector, customErrors = []) {
     const instance = new OneLineValidator(formSelector, customErrors);
-    return instance.validate(); // Returns data or false
+    return instance.validate();
   }
 }
 
-// ✅ UMD-style export
+// Optional export for modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = OneLineValidator;
 } else {
