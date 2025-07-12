@@ -1,8 +1,8 @@
 {
   "name": "one-line-validator",
-  "version": "1.0.0",
-  "description": "1-line form validation for beginners using jQuery.",
-  "main": "dist/OneLineValidator.min.js",
+  "version": "1.0.1",
+  "description": "1-line form validation for beginners.",
+  "main": "dist/OneLineValidator.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/codewithmark/one-line-validator"
@@ -10,7 +10,6 @@
   "keywords": [
     "form",
     "validation",
-    "jquery",
     "javascript",
     "one-line"
   ],
