@@ -1,5 +1,5 @@
 class OneLineValidator {
-  constructor(formSelector, customErrors = {}) {
+  constructor(formSelector, customErrors = []) {
     this.form = document.querySelector(formSelector);
     this.customErrors = customErrors;
     this.formData = {};
@@ -46,7 +46,11 @@ class OneLineValidator {
   }
 
   getErrorMessage(field, fallback) {
-    return this.customErrors[field.id] || fallback;
+    for (const err of this.customErrors) {
+      if (err.id && field.id === err.id) return err.msg;
+      if (err.class && field.classList.contains(err.class)) return err.msg;
+    }
+    return fallback;
   }
 
   validateField(field) {
@@ -62,7 +66,7 @@ class OneLineValidator {
       if (!emailRegex.test(value)) {
         errorMsg = this.getErrorMessage(field, 'Please enter a valid email address.');
       }
-    } else if (type === 'password' && field.id === 'password') {
+    } else if (type === 'password' && (field.id === 'password' || field.classList.contains('password'))) {
       if (value.length < 6) {
         errorMsg = this.getErrorMessage(field, 'Password must be at least 6 characters.');
       }
@@ -134,6 +138,12 @@ class OneLineValidator {
     }
 
     return this.isValid ? this.formData : false;
+  }
+
+  // ✅ Static method to call like a function
+  static validate(formSelector, customErrors = []) {
+    const instance = new OneLineValidator(formSelector, customErrors);
+    return instance.validate(); // Returns data or false
   }
 }
 
