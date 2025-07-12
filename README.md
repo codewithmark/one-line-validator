@@ -1,213 +1,89 @@
-# OneLineValidator
+# 🧪 OneLineValidator
 
-A simple, lightweight, and beginner-friendly JavaScript form validator class.
-✅ No dependencies
-✅ Custom error messages
-✅ Real-time validation
-✅ Works with plain HTML forms
-✅ Supports both browser and Node environments
+**A simple JavaScript class for validating HTML forms with live feedback and custom error messages — perfect for beginner web developers.**
 
 ---
 
 ## 🚀 Features
 
-* Validates common HTML input types (`email`, `password`, `tel`, `checkbox`, etc.)
-* Highlights invalid fields with red borders
-* Displays animated error messages below each field
-* Scrolls to the first invalid field
-* Supports custom error messages by input `id`
-* Automatically listens for changes to validate live
+* ✅ One-line form validation
+* 🔍 Custom error messages via `id` or `class`
+* 📧 Validates email, password, phone, confirm password, and checkboxes
+* 🎨 Styled error messages with animation
+* 🔄 Live validation on input and change events
 
 ---
 
-## 🧠 Requirements
+## 🛠️ Installation
 
-* Your fields must have an `id`
-* Include the script in your page or bundle it
-* Use standard HTML input types (no frameworks needed)
-
----
-
-## 📦 Installation
-
-### Option 1: Use in browser (via `<script>`)
+Include the script in your HTML:
 
 ```html
 <script src="OneLineValidator.js"></script>
-```
-
-### Option 2: Use with Node / Webpack / Vite
-
-```bash
-npm install
-```
-
-Then in your JS:
-
-```js
-const OneLineValidator = require('./OneLineValidator');
-// or
-import { OneLineValidator } from './OneLineValidator.js';
-```
+``` 
 
 ---
 
-## ✅ How to Use
+## ✅ Quick Start
 
-### Step 1: Create your form
+### 1. HTML Form Example
 
 ```html
 <form id="myForm">
-  <label>Email</label>
-  <input type="email" id="email" required>
-
-  <label>Password</label>
-  <input type="password" id="password" required>
-
-  <label>Confirm Password</label>
-  <input type="password" id="confirmPassword" required>
-
-  <label>Phone Number</label>
-  <input type="tel" id="phone">
-
-  <label>
-    <input type="checkbox" id="terms" required>
-    I agree to the terms
-  </label>
-
-  <button id="submitBtn">Submit</button>
+  <input type="email" id="email" required />
+  <input type="password" class="password" required />
+  <input type="password" id="confirmPassword" required />
+  <input type="tel" class="phone" />
+  <input type="checkbox" id="terms" required />
+  <button type="submit">Submit</button>
 </form>
 ```
 
----
+### 2. Define Custom Error Messages
 
-### Step 2: Add script
+```js
+const customErrors = [
+  { id: "email", msg: "Please enter a valid email address." },
+  { class: "password", msg: "Password must be at least 6 characters." },
+  { id: "confirmPassword", msg: "Passwords must match." },
+  { class: "phone", msg: "Enter a valid phone number (10–15 digits)." },
+  { id: "terms", msg: "You must accept the terms to continue." }
+];
+```
 
-```html
-<script>
-                                                👇👇👇👇
-  //element id = email ---> <input type="email" id="email" required>
-  /*
-  //syntax
-  const customErrors = {
-    element_id: "error message you want to show"
-  };
-  
-  */
-  const customErrors = {
-    email: "Please enter a valid email address.",
-    password: "Password must be at least 6 characters.",
-    confirmPassword: "Passwords must match.",
-    phone: "Enter a valid phone number (10–15 digits).",
-    terms: "You must accept the terms to continue."
-  };
+### 3. Validate on Form Submit
 
-  const validator = new OneLineValidator('#myForm', customErrors);
+```js
+document.querySelector('#myForm').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-  document.getElementById('submitBtn').addEventListener('click', function () {
-    const result = validator.validate();
+  const data = OneLineValidator.validate('#myForm', customErrors);
 
-    if (result) {
-      alert('Form submitted successfully!');
-      console.log(result); // You can now send this to your server
-    } else {
-      console.warn('Form has errors. Please fix them.');
-    }
-  });
-</script>
+  if (data) {
+    console.log('✅ Form is valid:', data);
+    // Handle form data here
+  } else {
+    console.log('❌ Form has errors.');
+  }
+});
 ```
 
 ---
 
-## 🧪 Validation Rules Supported
+## 📦 Output Example (If Valid)
 
-| Input Type        | Validation Logic                                |
-| ----------------- | ----------------------------------------------- |
-| `required`        | Must not be empty                               |
-| `email`           | Valid email format                              |
-| `password`        | At least 6 characters (only if `id="password"`) |
-| `confirmPassword` | Must match `#password` field                    |
-| `tel`             | 10–15 digits, optionally starts with `+`        |
-| `checkbox`        | Must be checked if required                     |
-
----
-
-## 🎯 Custom Error Messages
-
-Use the `customErrors` object with keys matching the input field `id`:
-
-```js
-const customErrors = {
-  email: "Custom email error message",
-  password: "Custom password message"
-};
-```
-
-If an `id` is not listed, a default message will be used.
-
----
-
-## 📜 Return Value
-
-If the form is valid, `.validate()` returns an object like this:
-
-```js
+```json
 {
-  email: "user@example.com",
-  password: "abc123",
-  confirmPassword: "abc123",
-  phone: "+1234567890",
-  terms: true
+  "email": "user@example.com",
+  "password": "abc123",
+  "confirmPassword": "abc123",
+  "phone": "+1234567890",
+  "terms": true
 }
 ```
 
-If invalid, it returns `false`.
-
 ---
 
-## 🧼 Resetting the Form (Optional)
+## 📚 License
 
-Want to reset errors and clear the form?
-
-```js
-document.getElementById('myForm').reset();
-validator.validate(); // will clear any previous errors
-```
-
----
-
-## 🔄 Supported Environments
-
-This validator supports both **browser** and **Node.js**:
-
-```js
-// Browser global
-window.OneLineValidator
-
-// Node/CommonJS
-const OneLineValidator = require('./OneLineValidator');
-
-// ESM
-import { OneLineValidator } from './OneLineValidator.js';
-```
-
----
-
-## 💡 Tips for Beginners
-
-* Make sure every input has a **unique `id`**
-* Put your JS code **after** the form in HTML or inside `window.onload`
-* You don’t need jQuery or any libraries
-* Works great with plain HTML and vanilla JS
-
----
-
-## 🔒 License
-
-MIT – free to use, modify, or contribute.
-
----
-
-## 🙋‍♀️ Need Help?
-
-Open an issue or reach out with questions — happy to support beginners!
+MIT License. Free to use, modify, and share.
