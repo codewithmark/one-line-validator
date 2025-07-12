@@ -1,45 +1,54 @@
 # 🧪 OneLineValidator
 
-**A simple JavaScript class for validating HTML forms with live feedback and custom error messages — perfect for beginner web developers.**
+**A lightweight, beginner-friendly JavaScript class for validating HTML forms with custom error messages and clean visual feedback.**
 
 ---
 
 ## 🚀 Features
 
-* ✅ One-line form validation
-* 🔍 Custom error messages via `id` or `class`
-* 📧 Validates email, password, phone, confirm password, and checkboxes
-* 🎨 Styled error messages with animation
-* 🔄 Live validation on input and change events
+* ✅ One-line validation with `OneLineValidator.validate(...)`
+* 🎯 Custom error messages via `id` or `class`
+* 🔄 Live field validation on input/change
+* ✨ Styled error messages with animation
+* 📦 Returns form data object when valid, `false` when not
+* 💡 Treats any field with a custom error as required (no `required` attribute needed)
 
 ---
 
 ## 🛠️ Installation
 
-Include the script in your HTML:
+Download or copy `OneLineValidator.js` into your project.
+
+Then include it:
 
 ```html
 <script src="OneLineValidator.js"></script>
-``` 
+```
+
+Or import via module (if using bundlers like Vite/Webpack):
+
+```js
+import OneLineValidator from './OneLineValidator.js';
+```
 
 ---
 
-## ✅ Quick Start
+## ✅ Usage Example
 
-### 1. HTML Form Example
+### HTML Form
 
 ```html
 <form id="myForm">
-  <input type="email" id="email" required />
-  <input type="password" class="password" required />
-  <input type="password" id="confirmPassword" required />
+  <input type="email" id="email" />
+  <input type="password" class="password" />
+  <input type="password" id="confirmPassword" />
   <input type="tel" class="phone" />
-  <input type="checkbox" id="terms" required />
+  <input type="checkbox" id="terms" />
   <button type="submit">Submit</button>
 </form>
 ```
 
-### 2. Define Custom Error Messages
+### JavaScript
 
 ```js
 const customErrors = [
@@ -49,28 +58,24 @@ const customErrors = [
   { class: "phone", msg: "Enter a valid phone number (10–15 digits)." },
   { id: "terms", msg: "You must accept the terms to continue." }
 ];
-```
 
-### 3. Validate on Form Submit
-
-```js
 document.querySelector('#myForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const data = OneLineValidator.validate('#myForm', customErrors);
 
   if (data) {
-    console.log('✅ Form is valid:', data);
-    // Handle form data here
+    console.log('✅ Form is valid!', data);
+    // Submit or use data
   } else {
-    console.log('❌ Form has errors.');
+    console.log('❌ Form has errors');
   }
 });
 ```
 
 ---
 
-## 📦 Output Example (If Valid)
+## 📦 Return Format (If Valid)
 
 ```json
 {
@@ -84,6 +89,22 @@ document.querySelector('#myForm').addEventListener('submit', function (e) {
 
 ---
 
+## 🎨 Styling
+
+Styles are automatically injected:
+
+* `.field-error` adds a red border and light red background
+* `.error-message` shows an animated message with an ❌ icon
+
+---
+
 ## 📚 License
 
-MIT License. Free to use, modify, and share.
+MIT — free to use, modify, and share.
+
+---
+
+## 💬 Author
+
+Built by \[Code With Mark].
+Contributions, suggestions, and issues welcome!
