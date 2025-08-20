@@ -53,6 +53,8 @@ IMPORTANT NOTE > all the input fields need to have id assigned to it otherwise r
 ### JavaScript
 
 ```js
+
+//IMPORTANT NOTE > all the input fields need to have id assigned to it otherwise return object will be null
 const customErrors = [
   { id: "email", msg: "Please enter a valid email address." },
   { class: "password", msg: "Password must be at least 6 characters." },
