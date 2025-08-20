@@ -38,6 +38,7 @@ import OneLineValidator from './OneLineValidator.js';
 ### HTML Form
 
 ```html
+//all the input fields need to have id assigned to it
 <form id="myForm">
   <input type="email" id="email" />
   <input type="password" class="password" />
