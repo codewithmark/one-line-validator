@@ -38,12 +38,13 @@ import OneLineValidator from './OneLineValidator.js';
 ### HTML Form
 
 ```html
-//all the input fields need to have id assigned to it
+IMPORTANT NOTE > all the input fields need to have id assigned to it otherwise return object will be null
+
 <form id="myForm">
   <input type="email" id="email" />
-  <input type="password" class="password" />
+  <input type="password" class="password" id="password" />
   <input type="password" id="confirmPassword" />
-  <input type="tel" class="phone" />
+  <input type="tel" class="phone"  id="phone" />
   <input type="checkbox" id="terms" />
   <button type="submit">Submit</button>
 </form>
